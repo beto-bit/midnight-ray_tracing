@@ -1,7 +1,7 @@
 OUT := ray_trace
 
-CXX := g++ -std=c++20 -O3
-CXXFLAGS := -std=c++20 -O3
+CXX := g++
+CXXFLAGS := -std=c++20 -O3 -isystem glm
 
 SRC_DIR := ./src
 OUT_DIR := ./obj
@@ -16,11 +16,12 @@ ${OUT}: ${OBJS}
 	${CXX} ${CXXFLAGS} $^ -o $@
 
 ${OBJS}: ${OUT_DIR}/%.o: ${SRC_DIR}/%.cpp
+	@ mkdir -p ${OUT_DIR}
 	${CXX} ${CXXFLAGS} $< -c -o $@
 
 .PHONY: clean
 clean:
-	rm -r ${OUT} ${OUT_DIR}
+	rm -rf ${OUT} ${OUT_DIR}
 
 .PHONY: test
 test:
