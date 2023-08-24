@@ -1,20 +1,29 @@
-OUT=ray_trace
-CC=g++ -std=c++20 -O3
+OUT := ray_trace
 
-S=./src
-O=./obj
+CXX := g++ -std=c++20 -O3
+CXXFLAGS := -std=c++20 -O3
 
-OBJ= 	$(O)/main.o			\
-			$(O)/renderer.o	\
-			$(O)/camera.o		\
-			$(O)/sphere.o		\
-			$(O)/scene.o		\
-			$(O)/ray.o			\
-			$(O)/material.o			\
+SRC_DIR := ./src
+OUT_DIR := ./obj
+
+SRCS := main.cpp renderer.cpp camera.cpp sphere.cpp scene.cpp ray.cpp material.cpp
+
+OBJS := $(SRCS:%.cpp=${OUT_DIR}/%.o)
+SRCS := $(foreach wrd,$(SRCS),${SRC_DIR}/$(wrd))
 
 
-$(OUT): $(OBJ)
-	$(CC) $(OBJ) -o $@
+${OUT}: ${OBJS}
+	${CXX} ${CXXFLAGS} $^ -o $@
 
-$(O)/%.o: $(S)/%.cpp 
-	$(CC) $< -c -o $@
+${OBJS}: ${OUT_DIR}/%.o: ${SRC_DIR}/%.cpp
+	${CXX} ${CXXFLAGS} $< -c -o $@
+
+.PHONY: clean
+clean:
+	rm -r ${OUT} ${OUT_DIR}
+
+.PHONY: test
+test:
+	@echo ${SRCS}
+	@echo ${OBJS}
+
