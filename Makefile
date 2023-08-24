@@ -3,7 +3,8 @@ MAKEFLAGS := --jobs=2
 OUT := ray_trace
 
 CXX := g++
-CXXFLAGS := -std=c++20 -O3 -isystem glm
+CXXFLAGS := -std=c++20 -O3 -MP -MD \
+			-isystem glm
 
 SRC_DIR := ./src
 OUT_DIR := ./obj
@@ -12,6 +13,7 @@ SRCS := main.cpp renderer.cpp camera.cpp sphere.cpp scene.cpp ray.cpp material.c
 
 OBJS := $(SRCS:%.cpp=${OUT_DIR}/%.o)
 SRCS := $(foreach wrd,$(SRCS),${SRC_DIR}/$(wrd))
+DEPS := $(OBJS:.o=.d)
 
 
 ${OUT}: ${OBJS}
@@ -20,6 +22,9 @@ ${OUT}: ${OBJS}
 ${OBJS}: ${OUT_DIR}/%.o: ${SRC_DIR}/%.cpp
 	@ mkdir -p ${OUT_DIR}
 	${CXX} ${CXXFLAGS} $< -c -o $@
+
+
+-include ${DEPS}
 
 .PHONY: clean
 clean:
