@@ -4,7 +4,7 @@ OUT := ray_trace
 
 CXX := g++
 CXXFLAGS := -std=c++20 -O3 -MP -MD \
-			-isystem glm
+			-isystemglm
 
 SRC_DIR := ./src
 OUT_DIR := ./obj
@@ -23,8 +23,10 @@ ${OBJS}: ${OUT_DIR}/%.o: ${SRC_DIR}/%.cpp
 	@ mkdir -p ${OUT_DIR}
 	${CXX} ${CXXFLAGS} $< -c -o $@
 
-
 -include ${DEPS}
+
+compile_flags.txt: Makefile
+	@ echo ${CXXFLAGS} | tr ' ' '\n' > $@
 
 .PHONY: clean
 clean:

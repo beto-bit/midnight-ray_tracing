@@ -1,3 +1,4 @@
 build/
 obj/
 ray_trace
+compile_flags.txt
