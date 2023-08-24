@@ -1,3 +1,5 @@
+MAKEFLAGS := --jobs=2
+
 OUT := ray_trace
 
 CXX := g++
