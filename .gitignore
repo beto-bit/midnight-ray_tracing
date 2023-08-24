@@ -1,1 +1,3 @@
 build/
+obj/
+ray_trace
