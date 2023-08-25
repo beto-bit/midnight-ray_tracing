@@ -1,3 +1,4 @@
+#include "camera.hpp"
 #include "renderer.hpp"
 
 Scene genRandomScene() {
@@ -55,28 +56,28 @@ int main() {
 
   float aspectRatio = 16.0f / 9.0f;
 
-  rt::cameraCreateInfo cInfo;
-  cInfo.up            = glm::vec3(0.0f, 1.0f, 0.0f);
-  cInfo.origin        = glm::vec3(13.0f, 2.0f, 3.0f);
-  cInfo.direction     = glm::vec3(0.0f, 0.0f, 0.0f);
-
-  cInfo.fov           = 20.0f;
-  cInfo.aperture      = 0.1f;
-  cInfo.aspectRatio   = aspectRatio;
-
-  cInfo.focusDistance = 10.0f;
+  rt::cameraCreateInfo cInfo {
+    .fov            = 20.0f,
+    .aperture       = 0.1f,
+    .aspectRatio    = aspectRatio,
+    .focusDistance  = 10.0f,
+    .up             = glm::vec3(0.0f, 1.0f, 0.0f),
+    .origin         = glm::vec3(13.0f, 2.0f, 3.0f),
+    .direction      = glm::vec3(0.0f, 0.0f, 0.0f)
+  };
 
   rt::Camera camera(&cInfo);
 
-  RenderInfo rinfo;
-  rinfo.width  = 500;
-  rinfo.heigth = 500 / aspectRatio;
-  rinfo.depth  = 10;
-  rinfo.scene  = &scene;
-  rinfo.camera = &camera;
-  rinfo.samplesPP = 100;
+  RenderInfo rInfo {
+    .depth = 10,
+    .width = 500,
+    .heigth = static_cast<int32_t>(500 / aspectRatio),
+    .samplesPP = 100,
+    .scene = &scene,
+    .camera = &camera
+  };
 
-  Renderer renderer(&rinfo);
+  Renderer renderer(&rInfo);
 
   renderer.run();
 
