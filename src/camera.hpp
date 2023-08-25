@@ -3,7 +3,7 @@
 #include <glm/glm.hpp>
 
 #include "ray.hpp"
-#include "utils.hpp"
+#include "util/utils.hpp"
 
 namespace rt {
   struct cameraCreateInfo {

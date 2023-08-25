@@ -11,7 +11,7 @@
 #include "camera.hpp"
 #include "scene.hpp"
 #include "sphere.hpp"
-#include "utils.hpp"
+#include "util/utils.hpp"
 
 struct RenderInfo {
   int32_t depth;
