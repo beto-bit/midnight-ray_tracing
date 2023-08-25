@@ -18,7 +18,9 @@ DEPS := $(OBJS:.o=.d)
 
 
 ${OUT}: ${OBJS}
-	${CXX} ${CXXFLAGS} $^ -o $@
+	@ echo "Linking..."
+	@ ${CXX} ${CXXFLAGS} $^ -o $@
+	@ echo "Done!"
 
 ${OBJS}: ${OUT_DIR}/%.o: ${SRC_DIR}/%.cpp
 	@ mkdir -p $(dir $@)
