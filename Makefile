@@ -4,7 +4,8 @@ OUT := ray_trace
 
 CXX := g++
 CXXFLAGS := -std=c++20 -O3 -MP -MD \
-			-isystemglm
+			-isystemglm \
+			-Wall -Wextra -Wpedantic
 
 SRC_DIR := ./src
 OUT_DIR := ./obj
