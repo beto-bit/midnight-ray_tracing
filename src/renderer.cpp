@@ -1,13 +1,14 @@
+#include <algorithm>
 #include "renderer.hpp"
 
 Renderer::Renderer(RenderInfo* info) : m_info(info) {}
 
 void Renderer::run() {
-std::cout 
-  << "P3" << '\n'
-  << m_info->width  << ' '
-  << m_info->heigth << ' ' 
-  << "\n255\n"; 
+  std::cout
+    << "P3" << '\n'
+    << m_info->width  << ' '
+    << m_info->heigth << ' '
+    << "\n255\n";
 
   for(int32_t j = (m_info->heigth - 1); j >= 0; j--) {
     std::cerr << "\r> remaining [" << j << "]  " << std::flush;
@@ -29,9 +30,9 @@ std::cout
       pixelColor = sqrt(scale * pixelColor);
 
       std::cout 
-        << static_cast<uint16_t>(256 * clamp(pixelColor.x, 0.0, 0.999)) << ' '
-        << static_cast<uint16_t>(256 * clamp(pixelColor.y, 0.0, 0.999)) << ' '
-        << static_cast<uint16_t>(256 * clamp(pixelColor.z, 0.0, 0.999)) << '\n';      
+        << static_cast<uint16_t>(256 * std::clamp(pixelColor.x, 0.0f, 0.999f)) << ' '
+        << static_cast<uint16_t>(256 * std::clamp(pixelColor.y, 0.0f, 0.999f)) << ' '
+        << static_cast<uint16_t>(256 * std::clamp(pixelColor.z, 0.0f, 0.999f)) << '\n';
     }
   }
 }

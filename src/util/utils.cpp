@@ -8,17 +8,6 @@ float randomFloat(const float min, const float max) {
   return min + (max-min) * randomFloat();
 }
 
-float clamp(const float x, const float min, const float max) {
-  if(x < min) {
-    return min;
-  }
-  if(x > max) {
-    return max;
-  }
-
-  return x;
-}
-
 glm::vec3 randomVec3() {
   return glm::vec3(randomFloat(), randomFloat(), randomFloat()); 
 }
