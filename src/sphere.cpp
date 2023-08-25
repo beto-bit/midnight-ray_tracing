@@ -1,7 +1,7 @@
 #include "sphere.hpp"
 
 Sphere::Sphere(const glm::vec3& center, const float radius, std::shared_ptr<Material> material) 
-  : m_center(center), m_radius(radius), m_material(material) {}
+  : m_radius(radius), m_center(center), m_material(material) {}
 
 bool Sphere::hit(const rt::Ray& ray, const float tmin, const float tmax, rt::rayHitRecord& record) const {
   glm::vec3 offset = ray.origin() - m_center;

@@ -3,7 +3,14 @@
 Lambertian::Lambertian(const glm::vec3& color) 
   : m_albedo(color) {}
 
-bool Lambertian::scatter(const rt::Ray& ray, const rt::rayHitRecord& record, glm::vec3& attenuation, rt::Ray& scattered) const {
+bool Lambertian::scatter(
+  [[maybe_unused]]
+  const rt::Ray& ray,
+  const rt::rayHitRecord& record,
+  glm::vec3& attenuation,
+  rt::Ray& scattered
+) const
+{
   glm::vec3 scatteredDirection = record.normal + randomUnitVector();
 
   bool nearZero = 
@@ -22,7 +29,7 @@ bool Lambertian::scatter(const rt::Ray& ray, const rt::rayHitRecord& record, glm
 }
 
 Metal::Metal(const glm::vec3& color, const float fuzzy) 
-  : m_albedo(color), m_fuzzy(fuzzy) {}
+  : m_fuzzy(fuzzy), m_albedo(color) {}
 
 bool Metal::scatter(const rt::Ray& ray, const rt::rayHitRecord& record, glm::vec3& attenuation, rt::Ray& scattered) const {
   glm::vec3 fuzziness = m_fuzzy * randomUnitVector();
@@ -35,7 +42,7 @@ bool Metal::scatter(const rt::Ray& ray, const rt::rayHitRecord& record, glm::vec
 }
 
 Dieletric::Dieletric(const glm::vec3& albedo, const float refractionIndex)
-  : m_albedo(albedo), m_refractionIndex(refractionIndex) {}
+  : m_refractionIndex(refractionIndex), m_albedo(albedo) {}
 
 bool Dieletric::scatter(const rt::Ray& ray, const rt::rayHitRecord& record, glm::vec3& attenuation, rt::Ray& scattered) const {
   attenuation = m_albedo;
